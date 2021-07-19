@@ -7,7 +7,6 @@ async function getAllBins(url){
 //using fetch to make get request to get all bin data...
 //use the data to create markers on the map
 const data = getAllBins("http://localhost:4000/get");
-console.log(data.slice(0,10));
 
 function initMap(){
     map = new google.maps.Map(document.getElementById('map'), {
@@ -31,28 +30,34 @@ function initMap(){
     const features = [
         {
           position: new google.maps.LatLng(25.283165, 82.969402),
-          type: "fullbin",
+          type: "fullbin"
           
-        },
-        {
-          position: new google.maps.LatLng(25.283216, 82.96640),
-          type: "emptybin",
-          
-        },
-        {
-          position: new google.maps.LatLng(25.285930, 82.968565),
-          type: "fullbin",
-          
-        },]
-        for (let i = 0; i < features.length; i++) {
-            var marker = new google.maps.Marker({
-              position: features[i].position,
-              icon: icons[features[i].type].icon,
-              map: map,
-            });
+        }]
+    getAllBins("http://localhost:4000/get").then((allBins) => {
+      console.log(allBins);
+      for(var i = 0; i < 2000; i++){
+        features.push({
+          position: new google.maps.LatLng(Number(allBins[i].LNG), Number(allBins[i].LAT)),
+          type: "fullbin"
+        })
+      };
 
-            
-            var infowindow = new google.maps.InfoWindow();
+      for (let i = 0; i < features.length; i++) {
+        var marker = new google.maps.Marker({
+          position: features[i].position,
+          icon: icons[features[i].type].icon,
+          map: map,
+        });
+      }
+
+        
+        var infowindow = new google.maps.InfoWindow();
+    })
+    
+
+
+
+        
            
             function makeInfoWindowEvent(map, infowindow,contentString, marker) {
                 google.maps.event.addListener(marker, 'click', function() {
