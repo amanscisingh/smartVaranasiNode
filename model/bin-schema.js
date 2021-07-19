@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const binSchema = mongoose.Schema({
     _id: Number,
@@ -17,4 +17,4 @@ const binSchema = mongoose.Schema({
 },  { collection : 'Bins' })
 
 const bin = mongoose.model('bin', binSchema)
-module.exports = bin;
+export default bin;

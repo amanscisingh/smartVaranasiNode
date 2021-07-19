@@ -1,9 +1,9 @@
-const Bin = require('../model/bin-schema.js');
+import Bin from '../model/bin-schema.js';
 
 const getAll = async (req, res) => {
     try {
         let allData = await Bin.find();
-        res.json(allData);
+        res.send(allData);
         console.log(allData);
 
     } catch (error) {
@@ -22,4 +22,4 @@ const getByID = async (req, res) => {
 
 }
 
-module.exports ={ getAll, getByID }
+export { getAll, getByID };

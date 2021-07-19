@@ -1,11 +1,12 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-const path = require('path');
-const mongoose = require('mongoose');
-const exphbs = require('express-handlebars');
-const route = require('./route/router.js')
-const userRoute = require('./route/userRoute.js')
-const wasteRoute = require('./route/wasteRoute')
+import path from 'path';
+import mongoose from 'mongoose';
+import exphbs from 'express-handlebars';
+import route from './route/router.js';
+import userRoute from './route/userRoute.js';
+import wasteRoute from './route/wasteRoute.js';
+import bodyParser from 'body-parser';
 
 const PORT = 4000;
 const URL = 'mongodb+srv://drako:iamgroot@cluster0.iuvbq.mongodb.net/smartCityVns?retryWrites=true&w=majority';
@@ -26,7 +27,12 @@ app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
 //setting up public folder
+const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, 'public')));
+
+// setting up body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
 
 app.use( express.json() );
 app.use('/', userRoute);
