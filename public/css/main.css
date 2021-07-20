@@ -50,20 +50,57 @@ a{
 }
 
 
-.control-element{
-    
-}
 
 /* css for map - aman singh */ 
 #map{
-    height: 60%;
+    height: 80%;
     width: 100%;
-    border: yellow 1px solid;
+    /* border: yellow 1px solid; */
     z-index: 100;
 }
 
+/* css for selectedBin - satakshi pal */
 .user-control{
-    height: 30%;
+    height: 10%;
     width: 100%;
+    background-color: bisque;
     border: turquoise 1px solid;
+    text-align: center;
+
+}
+.center{
+    text-align: center;
+    height: 65%;
+    /* background-color: green; */
+    padding: 20px;
+}
+.btn{
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+    font-size: large;
+    margin: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#bin-info{
+    text-align: center;
+    padding: 10px;
+    /* background-color: blueviolet; */
+}
+.imgs{
+    text-align: center;
+    padding: 10px;
+}
+#form{
+    text-align: left;
+    padding: 20px;
+    /* background-color: aliceblue; */
+}
+
+#report{
+    padding: 10px;
+    font-size: large;
+    margin: 3px;
 }

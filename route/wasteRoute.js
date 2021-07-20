@@ -17,4 +17,6 @@ wasteRoute.get('/:id', (req, res) => {
     res.render('selectedBin', { _id: req.params.id });
 });
 
+
+
 export default wasteRoute;
