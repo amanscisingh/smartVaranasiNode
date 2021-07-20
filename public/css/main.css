@@ -83,6 +83,15 @@ a{
     padding: 10px;
     cursor: pointer;
 }
+#submit{
+    background-color: rgb(30, 28, 184);
+    color: aliceblue;
+    padding: 4px;
+    margin: 5px;
+    font-size: large;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 #bin-info{
     text-align: center;
