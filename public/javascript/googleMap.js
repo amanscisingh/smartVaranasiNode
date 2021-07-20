@@ -7,7 +7,7 @@ async function getAllBins(url){
 //using fetch to make get request to get all bin data...
 //use the data to create markers on the map
 const data = getAllBins("http://localhost:4000/get");
-
+console.log("check");
 function initMap(){
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 25.319, lng: 82.965 },
@@ -100,7 +100,7 @@ function initMap(){
               handleLocationError(false, infoWindow, map.getCenter());
             }
           });
-        }
+        
         new google.maps.Marker({
           position: pos,
           map: map,
