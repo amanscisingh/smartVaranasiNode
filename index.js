@@ -16,7 +16,7 @@ mongoose.connect(URL, {
     useUnifiedTopology: true,
     useFindAndModify: false
 }).then(()=> {
-    app.listen(PORT, console.log(`Server running on port ${PORT} `))
+    app.listen(PORT, console.log(`Server running on port ${PORT} and DB is connected as Well!!! `))
 }).catch((err)=>{
     console.log('Error: ', err.message);
 })

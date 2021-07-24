@@ -4,7 +4,7 @@ const getAll = async (req, res) => {
     try {
         let allData = await Bin.find();
         res.send(allData);
-        console.log(allData);
+        // console.log(allData[0]);
 
     } catch (error) {
         res.json({"error": error.message});

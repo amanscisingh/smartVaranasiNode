@@ -1,9 +1,13 @@
 import mongoose from 'mongoose';
 
 const querySchema = mongoose.Schema({
-    request: {
+    _id: {
         type: String,
         required: true
+    },
+    report: {
+        user: { type: String, required: true, default: "User" },
+        description: { type: String, required: true }    
     },
     response: {
         user: { type: String, required: true, default: "Admin" },
