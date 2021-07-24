@@ -5,7 +5,7 @@ fork the repo
 
 
 Step 2:
-git clone <repo url>
+git clone [repo url]
 
 Step 3:
 npm install
