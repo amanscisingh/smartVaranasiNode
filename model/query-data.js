@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
+import { v1 as uuidv1 } from 'uuid';
 
 const querySchema = mongoose.Schema({
     _id: {
         type: String,
-        required: true
+        required: true,
+        default: uuidv1,
     },
     report: {
         user: { type: String, required: true, default: "User" },
@@ -11,7 +13,7 @@ const querySchema = mongoose.Schema({
     },
     response: {
         user: { type: String, required: true, default: "Admin" },
-        description: { type: String, required: true }    
+        description: { type: String, required: true , default: "No response" }    
     },
     binId: { type: String, required: true },
     createdAt: {

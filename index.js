@@ -7,6 +7,7 @@ import route from './route/router.js';
 import userRoute from './route/userRoute.js';
 import wasteRoute from './route/wasteRoute.js';
 import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
 
 const PORT = 4000;
 const URL = 'mongodb+srv://drako:iamgroot@cluster0.iuvbq.mongodb.net/smartCityVns?retryWrites=true&w=majority';
@@ -33,6 +34,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 // setting up body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+
+
+// Method Override for put requests
+app.use(methodOverride(function (req, res) {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      // look in urlencoded POST bodies and delete it
+      var method = req.body._method
+      delete req.body._method
+      return method
+    }
+  }))
 
 app.use( express.json() );
 app.use('/', userRoute);

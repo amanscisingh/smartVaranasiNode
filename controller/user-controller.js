@@ -15,6 +15,7 @@ const getByID = async (req, res) => {
         let num = req.params.number;
         let allData = await Bin.findById(num);
         res.json(allData);
+        return allData
        
     } catch (error) {
         res.json({"error": error.message});

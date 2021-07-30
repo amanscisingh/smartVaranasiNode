@@ -1,14 +1,16 @@
-<div id="bin-info">Bin Id is - {{_id}}
+<div id="bin-info">Locality - {{ LOCALITY }}
+    <br>
     <div class="imgs">
-        <img src="../public/images/homeBg.png">
-        <img src="../public/images/homeBg.png">
-        <img src="../public/images/homeBg.png">
-        <img src="../public/images/homeBg.png">
+        <img src="https://via.placeholder.com/50">
+        <img src="https://via.placeholder.com/50">
+        <img src="https://via.placeholder.com/50">
+        <img src="https://via.placeholder.com/50">
     </div>
     <div style="text-align: left;">
         <ul>
             <li>
-                status: filled full
+                Status - {{ Status }}
+                {{!-- Status - Empty --}}
             </li>
         </ul>
     </div>
@@ -16,15 +18,24 @@
 <hr>
 <div class="center">
     User Activity
+    <br><br>
+    <div class="buttons">
+        <form action = "/waste/{{_id}}" method = "POST">
+            <input type='hidden' name='_method' value='PUT'>
+            <input type="radio" name="choice" id="choice1" value="filled">
+            <label for="choice1">Filled</label>
+            <input type="radio" name="choice" id="choice2" value="empty">
+            <label for="choice2">Empty</label>
+            <br>
+            <button type="submit">Update Status</button>
+        </form>
+
+    </div>
     <br>
-    <form id="form">
-        <input type="radio" id="vehicle1" name="vehicle1" value="Bike">
-        <label for="vehicle1">Mark full</label><br>
-        <input type="radio" id="vehicle1" name="vehicle1" value="Bike">
-        <label for="vehicle1">Mark empty</label><br><br><br>
+    <form id="form" method="POST" action="/waste/{{_id}}">
         <label for="report">Report Incident:</label><br><br>
-        <textarea name="report" form="usrform">write your report here...</textarea>
-        <br><br>
+        <textarea name="report" id="report" placeholder="write your report here..."></textarea>
+        <br>
         <button id="submit" type="submit">Submit</button>
     </form>
 </div>
