@@ -5,7 +5,7 @@ import Query from '../model/query-data.js';
 
 wasteRoute.get('/', async (req, res) => {
     try {
-        let allBinData = await Bin.find();
+        // let allBinData = await Bin.find();
         
         res.render('waste');
     } catch (error) {

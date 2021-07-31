@@ -6,6 +6,7 @@ import exphbs from 'express-handlebars';
 import route from './route/router.js';
 import userRoute from './route/userRoute.js';
 import wasteRoute from './route/wasteRoute.js';
+import adminRoute from './route/adminRoute.js'
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 
@@ -50,6 +51,7 @@ app.use( express.json() );
 app.use('/', userRoute);
 app.use('/get', route);
 app.use('/waste', wasteRoute);
+app.use('/admin', adminRoute);
 
 
 
