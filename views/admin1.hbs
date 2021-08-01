@@ -1,2 +1,68 @@
+{{!-- <p>Code to view all the reports here...</p> --}}
+<h1>Admin</h1>
+<form id="form" method="GET" action="#">
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Search by ward</button>
+        <div id="myDropdown" class="dropdown-content">
+            <input type="text" placeholder="Search by ward" id="myInput" onkeyup="filterFunction()">
+            <a href="#about">About</a>
+            <a href="#base">Base</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact">Contact</a>
+            <a href="#custom">Custom</a>
+            <a href="#support">Support</a>
+            <a href="#tools">Tools</a>
+        </div>
+        
+    </div>
+    
+</form>
+<h3>Report lists</h3>
+<div class="card">
+    <div class="container1">
+        <h4><span style="float: left;">ward</span>
+            <span style="float: right;">user</span>
+        </h4>
+        <br>
+        <p>Report</p>
+    </div>
+</div>
+<div class="card">
+    <div class="container1">
+        <h4><span style="float: left;">ward</span>
+            <span style="float: right;">user</span>
+        </h4>
+        <br>
+        <p>Report</p>
+    </div>
+</div>
+<div class="card">
+    <div class="container1">
+        <h4><span style="float: left;">ward</span>
+            <span style="float: right;">user</span>
+        </h4>
+        <br>
+        <p>Report</p>
+    </div>
+</div>
+<script>
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
 
-<p>Code to view all the reports here...</p>
+    function filterFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("myDropdown");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+</script>
