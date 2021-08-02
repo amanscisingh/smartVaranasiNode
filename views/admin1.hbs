@@ -12,26 +12,36 @@
             <a href="#custom">Custom</a>
             <a href="#support">Support</a>
             <a href="#tools">Tools</a>
-        </div>       
+        </div>
     </div>
-    
+
 </form>
 <h3>Report lists</h3>
 
 
 
 {{#each data}}
+    <div class="card" onclick="bringForm({{@key}})">
+        
     
-
-    <div class="card">
         <div class="container1">
             <h4><span style="float: left;">ward</span>
                 <span style="float: right;">user</span>
             </h4>
-            
-            <p>-- {{ this.report.description }} </p>
-            
+
+        <p>-- {{ this.report.description }} </p>
         </div>
+        <div id={{@key}} style="display: none;">
+            <form id="form" method="POST" action="#">
+                <label for="report">Report Response:</label><br><br>
+                <textarea name="report" id="report" placeholder="write your report response here..."></textarea>
+                <br>
+                <button id="submit" type="submit">Submit</button>
+            </form>
+        </div>
+
+
+
     </div>
 
 {{/each}}
@@ -41,6 +51,11 @@
 <script>
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
+    }
+    function bringForm(id) {
+        console.log(id);
+        p=document.getElementById(id).style.display;
+        document.getElementById(id).style.display =(p=="block")?"None":"block";
     }
 
     function filterFunction() {
