@@ -12,39 +12,32 @@
             <a href="#custom">Custom</a>
             <a href="#support">Support</a>
             <a href="#tools">Tools</a>
-        </div>
-        
+        </div>       
     </div>
     
 </form>
 <h3>Report lists</h3>
-<div class="card">
-    <div class="container1">
-        <h4><span style="float: left;">ward</span>
-            <span style="float: right;">user</span>
-        </h4>
-        <br>
-        <p>Report</p>
+
+
+
+{{#each data}}
+    
+
+    <div class="card">
+        <div class="container1">
+            <h4><span style="float: left;">ward</span>
+                <span style="float: right;">user</span>
+            </h4>
+            
+            <p>-- {{ this.report.description }} </p>
+            
+        </div>
     </div>
-</div>
-<div class="card">
-    <div class="container1">
-        <h4><span style="float: left;">ward</span>
-            <span style="float: right;">user</span>
-        </h4>
-        <br>
-        <p>Report</p>
-    </div>
-</div>
-<div class="card">
-    <div class="container1">
-        <h4><span style="float: left;">ward</span>
-            <span style="float: right;">user</span>
-        </h4>
-        <br>
-        <p>Report</p>
-    </div>
-</div>
+
+{{/each}}
+
+
+
 <script>
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
