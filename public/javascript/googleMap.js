@@ -1,3 +1,4 @@
+// gives an array of all locations
 async function getAllBins(url){
   const response = await fetch(url);
   var data = await response.json();
@@ -40,8 +41,9 @@ function initMap(){
       for(var i = 0; i < 2000; i++){
         features.push({
           position: new google.maps.LatLng(Number(allBins[i].LNG), Number(allBins[i].LAT)),
-          type: "fullbin"
-        })
+          type: "fullbin",
+          id: allBins[i]._id
+        });
       };
 
       for (let i = 0; i < features.length; i++) {
@@ -49,6 +51,9 @@ function initMap(){
           position: features[i].position,
           icon: icons[features[i].type].icon,
           map: map,
+        });
+        marker.addListener('click', ()=> {
+          location.href = `http://localhost:4000/waste/${features[i].id}`;
         });
       }
 
