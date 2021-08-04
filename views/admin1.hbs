@@ -21,28 +21,37 @@
 
 
 {{#each data}}
-    <div class="card" onclick="bringForm({{@key}})">
-        
-    
-        <div class="container1">
-            <h4><span style="float: left;">ward</span>
-                <span style="float: right;">user</span>
-            </h4>
+<div class="card">
 
+
+    <div class="container1">
+        <h4><span style="float: left;">ward ---- user</span>
+            <span style="float: right;" onclick="bringForm({{@key}})">
+                <span>
+                    ✔
+                </span>
+                <span>
+                    ❌
+                </span>
+             </span>
+        </h4>
+        <br>
         <p>-- {{ this.report.description }} </p>
-        </div>
-        <div id={{@key}} style="display: none;">
-            <form id="form" method="POST" action="#">
-                <label for="report">Report Response:</label><br><br>
-                <textarea name="report" id="report" placeholder="write your report response here..."></textarea>
-                <br>
-                <button id="submit" type="submit">Submit</button>
-            </form>
-        </div>
-
-
-
     </div>
+    <div id={{@key}} style="display: none;">
+        <form id="form" method="POST" action="#">
+            <label for="report">Report Response:</label>
+            <br>
+
+            <textarea name="report" id="report" placeholder="write your report response here..."></textarea>
+            <br>
+            <button id="submit" type="submit">Submit</button>
+        </form>
+    </div>
+
+
+
+</div>
 
 {{/each}}
 
@@ -53,9 +62,10 @@
         document.getElementById("myDropdown").classList.toggle("show");
     }
     function bringForm(id) {
-        console.log(id);
-        p=document.getElementById(id).style.display;
-        document.getElementById(id).style.display =(p=="block")?"None":"block";
+        p = document.getElementById(id).style.display;
+        document.getElementById(id).style.display = (p == "none") ? "block" : "none";
+
+
     }
 
     function filterFunction() {
