@@ -16,59 +16,40 @@
 
 
 {{#each data}}
-<<<<<<< HEAD
-    <div class="card" onclick="bringForm({{@key}})">
-      <div class="container1">
-            <h4><span style="float: left;">ward</span>
-                <span style="float: right;">user</span>
-            </h4>
-=======
 <div class="card">
->>>>>>> efb92debe79f52e0c04852135673febee798c06c
-
-
     <div class="container1">
-        <h4><span style="float: left;">ward ---- user</span>
-            <span style="float: right;" onclick="bringForm({{@key}})">
+        <h4><span style="float: left;">ward</span>
+            
+            <span id="show{{@key}}" style="float: right;" onclick="bringForm({{@key}})">
                 <span>
-                    ✔
+                   🎯 
                 </span>
+            </span>
+
+            <span id="hide{{@key}}" style="float: right; display: none;" onclick="closeForm({{@key}})">
                 <span>
-                    ❌
+                   ❌ 
                 </span>
-             </span>
+            </span>
+
+            <span style="float: right;">user |  </span>
         </h4>
         <br>
-        <p>-- {{ this.report.description }} </p>
-<<<<<<< HEAD
+        <p>💨 {{ this.report.description }} </p>
+        <h6>
+            <span style="right: 0;"> {{formatDate this.createdAt 'MMMM Do YYYY, h:mm:ss a'}} </span>
+        </h6>
         </div>
         <div id={{@key}} style="display: none;">
             <form id="form" method="POST" action="/admin/{{ this._id }}">
                 <input type='hidden' name='_method' value='PUT'>
-                <label for="report">Report Response: <div id="close" onclick="closeForm({{@key}})">❌</div> </label>
-                <textarea name="report" id="report" placeholder="{{ this.response.description }}" style="margin: 3px; width: 250px; height: 60px;"></textarea>
+                <label for="report">Type your response here👇 </label>
+                <textarea name="report" id="report" placeholder="{{ this.response.description }}" style="margin: 3px; width: 285px; height: 60px;"></textarea>
                 <br>
                 <button id="submit" type="submit">Submit</button>
             </form>
         </div>
     </div>
-=======
-    </div>
-    <div id={{@key}} style="display: none;">
-        <form id="form" method="POST" action="#">
-            <label for="report">Report Response:</label>
-            <br>
-
-            <textarea name="report" id="report" placeholder="write your report response here..."></textarea>
-            <br>
-            <button id="submit" type="submit">Submit</button>
-        </form>
-    </div>
-
-
-
-</div>
->>>>>>> efb92debe79f52e0c04852135673febee798c06c
 
 {{/each}}
 
@@ -90,22 +71,16 @@
         document.getElementById("myDropdown").classList.toggle("show");
     }
     function bringForm(id) {
-<<<<<<< HEAD
-        if (document.getElementById(id).style.display == "none") {
-             p=document.getElementById(id).style.display;
-            document.getElementById(id).style.display =  'block';
-        }
+        document.getElementById(id).style.display =  'block';
+        document.getElementById("show"+id).style.display = "none";
+        document.getElementById("hide"+id).style.display = "block";
+        
     }
 
     function closeForm(id) {
-        console.log("i am rinn")
         document.getElementById(id).style.display = "none";
-=======
-        p = document.getElementById(id).style.display;
-        document.getElementById(id).style.display = (p == "none") ? "block" : "none";
-
-
->>>>>>> efb92debe79f52e0c04852135673febee798c06c
+        document.getElementById("hide"+id).style.display = "none";
+        document.getElementById("show"+id).style.display = "block";
     }
 
     function filterFunction() {

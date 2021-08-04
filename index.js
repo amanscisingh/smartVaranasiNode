@@ -23,9 +23,14 @@ mongoose.connect(URL, {
     console.log('Error: ', err.message);
 })
 
+//Setting up datetime formatting
+import moment from 'moment';
+function formatDate(date, format) {
+  return moment(date).format(format)
+};
 
 //Setting up handlebars
-app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
+app.engine('.hbs', exphbs({helpers:{ formatDate }, defaultLayout: 'main', extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
 //setting up public folder

@@ -1,6 +1,7 @@
 import express from 'express';
 const adminRoute = express.Router();
 import queryData from '../model/query-data.js';
+import bin from '../model/bin-schema.js';
 
 adminRoute.get('/', async (req, res) => {
     try {
@@ -29,6 +30,15 @@ adminRoute.put('/:id', async (req, res)=> {
     res.redirect('/admin');
 
 
+});
+
+// Mahamoorganj, Varanasi, UP, India - currently working on this locality... 
+adminRoute.get('/route/:LOCALITY', async (req, res) => {
+    console.log(req.query);
+    var data = await bin.find({ LOCALITY:req.params.LOCALITY }).lean();
+    console.log(data.length, data[0]);
+    res.render('adminRoute', { layout: 'adminLayout', data: data });
+          
 });
 
 

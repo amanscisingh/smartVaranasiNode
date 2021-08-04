@@ -23,4 +23,26 @@ const getByID = async (req, res) => {
 
 }
 
-export { getAll, getByID };
+const getCoordinates = async (req, res) => {
+    try {
+        var findArr=[];
+        for (const q in req.query) {
+            findArr.push(req.query[q]);
+        };
+        var coordinatesArray = [];
+        var data = await Bin.find({ _id: {$in :findArr } }).lean();
+        for (var i = 0; i < data.length; i++) {
+            coordinatesArray.push({
+                lat: data[i].LAT,
+                lng: data[i].LNG
+            });
+        }
+        res.json(coordinatesArray);
+       
+    } catch (error) {
+        res.json({"error": error.message});
+    }
+
+}
+
+export { getAll, getByID, getCoordinates };
