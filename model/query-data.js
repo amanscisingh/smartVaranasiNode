@@ -16,6 +16,7 @@ const querySchema = mongoose.Schema({
         description: { type: String, required: true , default: "No response" }    
     },
     binId: { type: String, required: true },
+    binWard: { type: String, required: true },
     createdAt: {
         type: Date,
         required: true,

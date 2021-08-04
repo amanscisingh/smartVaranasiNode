@@ -1,30 +1,23 @@
 {{!-- <p>Code to view all the reports here...</p> --}}
 <h1>Admin</h1>
-<form id="form" method="GET" action="#">
+
     <div class="dropdown">
         <button onclick="myFunction()" class="dropbtn">Search by ward</button>
         <div id="myDropdown" class="dropdown-content">
             <input type="text" placeholder="Search by ward" id="myInput" onkeyup="filterFunction()">
-            <a href="#about">About</a>
-            <a href="#base">Base</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>
-            <a href="#custom">Custom</a>
-            <a href="#support">Support</a>
-            <a href="#tools">Tools</a>
+            <a href="?WARD=Virdopur">Virdopur</a>
+            <a href="?WARD=Raneepur">Raneepur</a>
         </div>
     </div>
 
-</form>
+
 <h3>Report lists</h3>
 
 
 
 {{#each data}}
     <div class="card" onclick="bringForm({{@key}})">
-        
-    
-        <div class="container1">
+      <div class="container1">
             <h4><span style="float: left;">ward</span>
                 <span style="float: right;">user</span>
             </h4>
@@ -32,30 +25,45 @@
         <p>-- {{ this.report.description }} </p>
         </div>
         <div id={{@key}} style="display: none;">
-            <form id="form" method="POST" action="#">
-                <label for="report">Report Response:</label><br><br>
-                <textarea name="report" id="report" placeholder="write your report response here..."></textarea>
+            <form id="form" method="POST" action="/admin/{{ this._id }}">
+                <input type='hidden' name='_method' value='PUT'>
+                <label for="report">Report Response: <div id="close" onclick="closeForm({{@key}})">❌</div> </label>
+                <textarea name="report" id="report" placeholder="{{ this.response.description }}" style="margin: 3px; width: 250px; height: 60px;"></textarea>
                 <br>
                 <button id="submit" type="submit">Submit</button>
             </form>
         </div>
-
-
-
     </div>
 
 {{/each}}
 
-
+<style>
+    label{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 2px;
+    };
+    #close{
+        margin-left: 10px;
+        margin-bottom: 2px;
+    };
+    
+</style>
 
 <script>
     function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
     }
     function bringForm(id) {
-        console.log(id);
-        p=document.getElementById(id).style.display;
-        document.getElementById(id).style.display =(p=="block")?"None":"block";
+        if (document.getElementById(id).style.display == "none") {
+             p=document.getElementById(id).style.display;
+            document.getElementById(id).style.display =  'block';
+        }
+    }
+
+    function closeForm(id) {
+        console.log("i am rinn")
+        document.getElementById(id).style.display = "none";
     }
 
     function filterFunction() {

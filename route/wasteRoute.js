@@ -22,12 +22,14 @@ wasteRoute.get('/:id', async (req, res) => {
 wasteRoute.post('/:id', async (req, res) => {
     try {
         const id = req.params.id;
+        const binData = await Bin.findById(id);
         const report = req.body.report;
         const data = new Query({
             report: {
                 description: report
             },
-            binId: id
+            binId: id,
+            binWard: binData.Ward,
         });
         data.save();
         res.redirect('/waste/'+id.toString());
