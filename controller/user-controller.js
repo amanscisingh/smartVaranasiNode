@@ -33,8 +33,8 @@ const getCoordinates = async (req, res) => {
         var data = await Bin.find({ _id: {$in :findArr } }).lean();
         for (var i = 0; i < data.length; i++) {
             coordinatesArray.push({
-                lat: data[i].LAT,
-                lng: data[i].LNG
+                lat: data[i].LNG,
+                lng: data[i].LAT
             });
         }
         res.json(coordinatesArray);

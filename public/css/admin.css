@@ -156,10 +156,15 @@ h5{
 
 /* css for map - aman singh */ 
 #map{
-  height: 70%;
+  height: 60%;
   width: 100%;
   border: yellow 1px solid;
   z-index: 100;
+}
+
+#directionsPanel{
+  height: 100%;
+  overflow-y: scroll;
 }
 
 /* CSS for adminRoute ENDS */
