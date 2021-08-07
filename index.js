@@ -7,11 +7,24 @@ import route from './route/router.js';
 import userRoute from './route/userRoute.js';
 import wasteRoute from './route/wasteRoute.js';
 import adminRoute from './route/adminRoute.js'
+import authRoute from './route/authRoute.js';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
+import dotenv from 'dotenv';
+import passport from 'passport';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 
-const PORT = 4000;
-const URL = 'mongodb+srv://drako:iamgroot@cluster0.iuvbq.mongodb.net/smartCityVns?retryWrites=true&w=majority';
+// Load config
+dotenv.config({ path: './config/config.env' });
+
+// Passport config
+import pass from './config/passport.js';
+pass(passport);
+
+
+const PORT = process.env.PORT || 3000;
+const URL = process.env.MONGO_URI;
 
 mongoose.connect(URL, {
     useNewUrlParser: true,
@@ -32,6 +45,23 @@ function formatDate(date, format) {
 //Setting up handlebars
 app.engine('.hbs', exphbs({helpers:{ formatDate }, defaultLayout: 'main', extname: '.hbs'}));
 app.set('view engine', '.hbs');
+
+
+// setting up session
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  key: 'user_sid',
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: 'mongodb://localhost/4000' })
+}))
+
+
+// Setting up passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 //setting up public folder
 const __dirname = path.resolve();
@@ -57,6 +87,7 @@ app.use('/', userRoute);
 app.use('/get', route);
 app.use('/waste', wasteRoute);
 app.use('/admin', adminRoute);
+app.use('/auth', authRoute);
 
 
 

@@ -1,9 +1,14 @@
 import express from 'express';
 const userRouter = express.Router();
 import bin from '../model/bin-schema.js';
+import { ensureAuth, ensureGuest } from '../middleware/auth.js';
 
 
-userRouter.get('/', (req, res) => {
+userRouter.get('/', ensureGuest, (req, res) => {
+    res.render('intro', { layout : 'blank' });
+});
+
+userRouter.get('/home', ensureAuth, (req, res) => {
     res.render('home');
 });
 
