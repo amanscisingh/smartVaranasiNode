@@ -18,8 +18,11 @@ h2{
     margin: 0;
 }
 
-h4{
+h4 {
     margin: 0;
+    text-align: center;
+    background-color: darkcyan;
+    padding: 3px;
 }
 
 a{
@@ -57,7 +60,7 @@ a{
 .control-element{
     display: flex;
     flex-direction: row;
-    height: 80%;
+    height: 70%;
     padding-left: 3px;
 }
 
@@ -88,31 +91,33 @@ img{
 }
 
 /* css for selectedBin - satakshi pal */
-.user-control{
-    height: 10%;
+.user-control {
+    height: 15.5%;
     width: 100%;
     background-color: bisque;
-    border: turquoise 1px solid;
+    /* border: turquoise 1px solid; */
     text-align: center;
-
 }
+
 .center{
-    text-align: center;
-    height: 65%;
+    text-align: left;
+    margin-left: 10px;
+    height: 55%;
     /* background-color: green; */
     padding: 20px;
 }
-.btn{
-    background-color: blue;
+.btn {
+    background-color: darkcyan;
     color: white;
     border-radius: 5px;
     font-size: large;
     margin: 10px;
     padding: 10px;
     cursor: pointer;
+    margin-top: 25px;
 }
 #submit{
-    background-color: rgb(30, 28, 184);
+    background-color: rgb(100 45 59);
     color: aliceblue;
     padding: 4px;
     margin: 5px;
@@ -132,12 +137,24 @@ img{
 }
 #form{
     text-align: left;
-    padding: 20px;
+    /* padding: 20px; */
     /* background-color: aliceblue; */
 }
 
-#report{
+.report{
     padding: 10px;
     font-size: large;
     margin: 3px;
+}
+.bin-info{
+    background-color: darkcyan;
+    height: 99.9%;
+}
+.btn1 {
+    background-color: rgb(100 45 59);
+    color: white;
+    padding: 5px;
+    margin: 3px;
+    font-size: medium;
+    border-radius: 5px;
 }
