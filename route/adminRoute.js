@@ -39,7 +39,7 @@ adminRoute.get('/route/:LOCALITY', async (req, res) => {
     console.log(data.length, data[0]);
     res.render('adminRoute', { layout: 'adminLayout', data: data });
           
-});
+});``
 
 
 export default adminRoute;
