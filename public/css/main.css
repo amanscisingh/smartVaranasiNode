@@ -158,3 +158,13 @@ img{
     font-size: medium;
     border-radius: 5px;
 }
+
+
+
+/* for qrcode */
+#qr-scanner {
+    height: 80%;
+    width: 100%;
+    z-index: 1000;
+
+}

@@ -118,6 +118,30 @@ infoWindow.setContent(
 );
 infoWindow.open(map);
 }
+
+
+// const qrScanner = new QrScanner(qrDiv, result => console.log('deoded stuff is', result));
+
+function scan() {
+  console.log('clikkker');
+  import('./qr-scanner.min.js').then((res)=> {
+    const map = document.getElementById('map');
+    const qrDiv = document.createElement('video');
+    qrDiv.id = 'qr-scanner';
+    const container = document.getElementById('container');
+    container.appendChild(qrDiv);
+    if (map) {
+      container.removeChild(map);
+    }
+
+    const QrScanner = res.default;
+    QrScanner.WORKER_PATH = './qr-scanner-worker.min.js';
+    const qrScanner = new QrScanner(qrDiv, result => console.log('decoded qr code:', result), err => console.log(err));
+
+    qrScanner.start(qrDiv);
+
+  })
+}
         
 
 
