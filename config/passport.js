@@ -4,7 +4,7 @@ import User from '../model/user.js';
 
 
 
-export default function (passport) {
+function pass (passport) {
     passport.use(new GoogleStrategy({
         clientID : process.env.GOOGLE_CLIENT_ID,
         clientSecret : process.env.GOOGLE_CLIENT_SECRET,
@@ -18,7 +18,6 @@ export default function (passport) {
             lastName: profile.name.familyName,
             image: profile.photos[0].value,
         };
-        console.log(newUser);
 
         try {
             let user = await User.findOne({ googleId: profile.id });
@@ -29,6 +28,7 @@ export default function (passport) {
                 user = await User.create(newUser);
                 done(null, user);
             };
+            console.log(user._id);
             
         } catch (error) {
             console.error('ll', error);
@@ -45,3 +45,15 @@ export default function (passport) {
         });
       });
 }
+
+function sample () {
+    return "this is sample testing..."
+};
+
+
+
+// export
+export {
+    pass,
+    sample,
+};

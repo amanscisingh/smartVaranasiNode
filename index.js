@@ -4,7 +4,8 @@ import path from 'path';
 import mongoose from 'mongoose';
 import exphbs from 'express-handlebars';
 import route from './route/router.js';
-import userRoute from './route/userRoute.js';
+import defaultRoute from './route/defaultRoute.js';
+import profileRoute from './route/profileRoute.js';
 import wasteRoute from './route/wasteRoute.js';
 import adminRoute from './route/adminRoute.js'
 import authRoute from './route/authRoute.js';
@@ -19,7 +20,7 @@ import MongoStore from 'connect-mongo';
 dotenv.config({ path: './config/config.env' });
 
 // Passport config
-import pass from './config/passport.js';
+import { pass } from './config/passport.js';
 pass(passport);
 
 
@@ -83,11 +84,12 @@ app.use(methodOverride(function (req, res) {
   }))
 
 app.use( express.json() );
-app.use('/', userRoute);
+app.use('/', defaultRoute);
 app.use('/get', route);
 app.use('/waste', wasteRoute);
 app.use('/admin', adminRoute);
 app.use('/auth', authRoute);
+app.use('/profile', profileRoute);
 
 
 

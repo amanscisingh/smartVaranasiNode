@@ -12,7 +12,16 @@ router.get('/google', passport.authenticate('google', { scope : ['profile'] }));
 router.get('/google/callback', passport.authenticate('google', {
     failureRedirect: '/',
 }), (req, res) => {
-    res.redirect('/home');
+    var user = req.user;
+    res.redirect('/profile/'+user._id);
+});
+
+// @DESC   Logout User
+// @route /auth/logout
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
 });
 
 export default router;

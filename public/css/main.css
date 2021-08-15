@@ -168,3 +168,78 @@ img{
     z-index: 1000;
 
 }
+
+
+
+
+
+/* css for intro.hbs */
+.logInBtn{
+    width: 100%;
+    height: 20%;
+    margin: auto
+}
+
+
+
+
+
+
+
+/* for user profile page */
+#user{
+    height: 55%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#profileImage{
+    height: 80%;
+    width: 40%;
+    margin: auto;
+    margin-top: 8px;
+    border-radius: 100%;
+}
+
+.top-section{
+    height: 28px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: yellow;
+    color: tomato;
+}
+
+.top-section span{
+    margin: 2px;
+}
+
+.middle-section{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 30%;
+}
+
+.bottom-section{
+    width: 100%;
+    height: fit-content;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.bottom-section input{
+    margin: auto;
+}
+
+form{
+    margin: 0 auto;
+    text-align: center;
+}
+
+#queries{
+    width: 100%;
+    height: 45%;
+    overflow-y: scroll;
+}

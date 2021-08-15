@@ -1,0 +1,9 @@
+<script>
+    setTimeout(() => {
+        var profileBtn = document.getElementById('profileBtn');
+        profileBtn.href = '/profile/' + localStorage.getItem('userId'); 
+        console.log(localStorage.getItem('userId'));  
+    }, 2000);
+        
+
+</script>
