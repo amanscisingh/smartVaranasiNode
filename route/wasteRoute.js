@@ -12,7 +12,14 @@ wasteRoute.get('/', async (req, res) => {
         res.json( {"error": error.message} );
     }
 });
-
+wasteRoute.get('/scan',async(req,res)=>{
+    try{
+        res.render('scan');
+    }
+    catch(error){
+        res.json({"error": error.message})
+    }
+});
 wasteRoute.get('/:id', async (req, res) => {
     const id = req.params.id
     const data = await Bin.findById(id);
