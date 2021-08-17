@@ -1,0 +1,25 @@
+<div class="top-container" id="top-container">
+    <h3>Confirm bins to start your journey✌</h3>
+    {{#each data}}
+        <h5> {{this._id}} : {{ this.LOCALITY }} </h5>
+        <input class="checkbox" type="checkbox" id="{{this._id}}" name="routeData" value="{{this._id}}" checked/>
+    {{/each}}
+</div>
+
+<div id="map" style="display: none;">
+
+</div>
+
+
+<div class="bottom-container" id="bottom-container">
+    <hr>
+    <div id="directionsPanel"></div>
+    
+</div>
+
+<p id="hidden" style="display: none;">{{coordinatesArray}} </p>
+
+
+<script src="/javascript/employeeRouteMap.js"> </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLXxFA0RCDogfD24J3GmKE8wlJuGOizrA&map_ids=4719b11c4529a336"> async </script>
+ 

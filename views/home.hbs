@@ -2,16 +2,18 @@
 
 <a href="/admin/tasks">Admin Task View</a>
 <br>
-<a href="/employee/tasks">Employeee Assigns Task</a>
+<a href="#" id="taskBtn">Employeee Assigns Task</a>
 
 
 <script>
     setTimeout(() => {
+        var taskBtn = document.getElementById('taskBtn');
         var profileBtn = document.getElementById('profileBtn');
         profileBtn.href = '/profile/' + localStorage.getItem('userId'); 
+        taskBtn.href = '/employee/tasks/' + localStorage.getItem('userId');
         console.log(localStorage.getItem('userId'));  
-    }, 2000);
-        
+    }, 100);
+
 
 </script>
 
