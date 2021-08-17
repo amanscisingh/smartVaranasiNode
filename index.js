@@ -8,6 +8,7 @@ import defaultRoute from './route/defaultRoute.js';
 import profileRoute from './route/profileRoute.js';
 import wasteRoute from './route/wasteRoute.js';
 import adminRoute from './route/adminRoute.js'
+import employeeRoute from './route/employeeRoute.js'
 import authRoute from './route/authRoute.js';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
@@ -88,6 +89,7 @@ app.use('/', defaultRoute);
 app.use('/get', route);
 app.use('/waste', wasteRoute);
 app.use('/admin', adminRoute);
+app.use('/employee', employeeRoute);
 app.use('/auth', authRoute);
 app.use('/profile', profileRoute);
 

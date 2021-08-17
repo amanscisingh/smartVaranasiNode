@@ -39,7 +39,14 @@ adminRoute.get('/route/:LOCALITY', async (req, res) => {
     console.log(data.length, data[0]);
     res.render('adminRoute', { layout: 'adminLayout', data: data });
           
-});``
+});
+
+adminRoute.get('/tasks', (req, res) => {
+    res.render('adminTasks', { layout: 'adminLayout' });
+});
+
+
+
 
 
 export default adminRoute;
