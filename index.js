@@ -7,6 +7,7 @@ import route from './route/router.js';
 import defaultRoute from './route/defaultRoute.js';
 import profileRoute from './route/profileRoute.js';
 import wasteRoute from './route/wasteRoute.js';
+import apiRoute from './route/apiRoute.js';
 import adminRoute from './route/adminRoute.js'
 import employeeRoute from './route/employeeRoute.js'
 import authRoute from './route/authRoute.js';
@@ -44,8 +45,12 @@ function formatDate(date, format) {
   return moment(date).format(format)
 };
 
+function indexing(key) {
+  return parseInt(key)+1;
+}
+
 //Setting up handlebars
-app.engine('.hbs', exphbs({helpers:{ formatDate }, defaultLayout: 'main', extname: '.hbs'}));
+app.engine('.hbs', exphbs({helpers:{ formatDate, indexing }, defaultLayout: 'main', extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
 
@@ -92,7 +97,7 @@ app.use('/admin', adminRoute);
 app.use('/employee', employeeRoute);
 app.use('/auth', authRoute);
 app.use('/profile', profileRoute);
-
+app.use('/api', apiRoute);
 
 
 

@@ -1,1 +1,13 @@
-<h3>tasksss</h3>
+<h3>Task For {{tasks.[0].employeeName}}</h3>
+
+{{#each tasks}}
+<hr>
+    <div class="task">
+        <span style="float: left;"> {{indexing @key}}: {{this.taskName}}</span>
+        <a href='/employee/tasks/{{this.employeeID}}/{{@key}}/map/?t={{this.taskName}}'> <span style="float: right;">🎯</span></a> <br>
+        <p>{{this.taskArray}}</p>
+        <p>{{this.taskStatus}}</p>
+    </div>
+    
+{{/each}}
+
