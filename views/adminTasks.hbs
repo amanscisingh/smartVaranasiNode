@@ -1,1 +1,126 @@
+<style>
+    .assign_task_form {
+        max-width: 350px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    input[type=text],
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+        background: #000;
+    }
+</style>
 <h3>admin assign</h3>
+<div class="assign_task_form">
+    <form>
+        <select id="employee_name">
+            <option value="employee_name">Select Employee</option>
+            <option value="ram">Ram</option>
+            <option value="shyam">Shyam</option>
+            <option value="karan">Karan</option>
+        </select>
+        <br>
+        <select id="zone">
+            <option value="zone">Select Zone</option>
+        </select>
+        <br>
+        
+        <select id="ward">
+            <option value="ward">Select Ward</option>
+        </select>
+        <br>
+        <select id="locality">
+            <option value="locality">Select Locality</option>
+        </select>
+        <hr>
+        <br>
+        
+    </form>
+
+</div>
+<script>
+    fetch('/api/zone').then(async (response) => {
+            response = await response.json();
+            findZones(response);
+    });
+    function findZones(response){
+        ele=document.getElementById("zone");
+        for (let i = 0; i < response.length; i++) {
+            let li=document.createElement('option');
+            li.value=response[i];
+            li.innerText=response[i];
+            ele.appendChild(li);
+        }
+    }
+    
+    document.getElementById("zone").onchange = find_wards;
+    function find_wards(){
+        var e = document.getElementById("zone");
+        var get_zone = e.options[e.selectedIndex].text;
+        fetch('/api/zone/'+get_zone).then(async (response) => {
+            response = await response.json();
+            findWards(response);
+        });
+    }
+    
+    function findWards(response) {
+        ele=document.getElementById("ward");
+        for (let i = 0; i < response.length; i++) {
+            let li=document.createElement('option');
+            li.value=response[i];
+            li.innerText=response[i];
+            ele.appendChild(li);
+        }
+
+    }
+    document.getElementById("ward").onchange = find_locality;
+    function find_locality(){
+        var e = document.getElementById("ward");
+        var get_ward = e.options[e.selectedIndex].text;
+        fetch('/api/ward/'+get_ward).then(async (response) => {
+            response = await response.json();
+            findLocality(response);
+        });
+    }
+    
+    function findLocality(response) {
+        ele=document.getElementById("locality");
+        for (let i = 0; i < response.length; i++) {
+            let li=document.createElement('option');
+            li.value=response[i];
+            li.innerText=response[i];
+            ele.appendChild(li);
+        }
+
+    }
+
+
+
+    {{!-- display_bins --}}
+    document.getElementById("locality").onchange = find_bins;
+    
+    function find_bins(){
+        var e = document.getElementById("locality");
+        var get_locality = e.options[e.selectedIndex].text;
+        get_locality.replaceAll(" ","%20");
+        locat='http://localhost:4000/admin/route/'+get_locality;
+        console.log(locat);
+        window.location.href=locat;
+    }
+    
+
+        
+        
+    
+    
+
+</script>

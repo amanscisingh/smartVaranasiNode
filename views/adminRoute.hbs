@@ -1,5 +1,5 @@
 <div class="top-container" id="top-container">
-    <h3>Confirm bins to start your journey✌</h3>
+    <h3>Assign bins to the employee✌</h3>
     {{#each data}}
         <h5> {{this._id}} : {{ this.LOCALITY }} </h5>
         <input class="checkbox" type="checkbox" id="{{this._id}}" name="routeData" value="{{this._id}}" checked/>
@@ -13,7 +13,7 @@
 
 <div class="bottom-container" id="bottom-container">
     <hr>
-    <a id="navigate" href="#" style="text-decoration: none;font-weight:bold">Start My Navigation</a>
+    <a id="navigate" href="#" style="text-decoration: none;font-weight:bold">Assign task to the Employee</a>
     <div id="directionsPanel"></div>
 </div>
 
