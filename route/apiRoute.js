@@ -14,7 +14,16 @@ apiRoute.get('/zone/:zone', async (req, res) => {
     
     res.json(Array.from(s));
 });
-
+// get all zones
+apiRoute.get('/zone', async (req, res) => {
+    const zone = req.params.zone;
+    const data = await Bin.find();
+    var s = new Set();
+    for (let i = 0; i < data.length; i++) {
+        s.add(data[i].Zone);
+    };
+    res.json(Array.from(s));
+});
 
 // get LOCALITY on input of ward
 apiRoute.get('/ward/:ward', async (req, res) => {

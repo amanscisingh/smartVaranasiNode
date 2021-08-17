@@ -34,17 +34,15 @@ adminRoute.put('/:id', async (req, res)=> {
 
 // Mahamoorganj, Varanasi, UP, India - currently working on this locality... 
 adminRoute.get('/route/:LOCALITY', async (req, res) => {
-    console.log(req.query);
+    // console.log(req.query);
     var data = await bin.find({ LOCALITY:req.params.LOCALITY }).lean();
     console.log(data.length, data[0]);
     res.render('adminRoute', { layout: 'adminLayout', data: data });
           
 });
 
-adminRoute.get('/tasks/:LOCALITY', async(req, res) => {
-    var data = await bin.find({ LOCALITY:req.params.LOCALITY }).lean();
-    console.log(data.length, data[0]);
-    res.render('adminTasks', { layout: 'adminLayout', data: data });
+adminRoute.get('/tasks/', async(req, res) => {
+    res.render('adminTasks', { layout: 'adminLayout'});
 });
 
 
