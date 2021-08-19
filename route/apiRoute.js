@@ -39,7 +39,11 @@ apiRoute.get('/ward/:ward', async (req, res) => {
     
     res.json(Array.from(s));
 });
-
+// get all employee id's
+apiRoute.get('/EmployeeIds', async(req,res)=>{
+    var employeeIds=await Tasks.find().lean();
+    res.json(employeeIds);
+})
 // get data of employees for analytics an dgraph plotting
 apiRoute.get('/analyticsTasksData/:EmployeeID', async (req, res) => {
     const EmployeeID = req.params.EmployeeID;

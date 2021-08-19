@@ -1,3 +1,6 @@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+    
 <style>
     .assign_task_form {
         max-width: 350px;
@@ -43,6 +46,7 @@
         <br>
         
     </form>
+    <canvas id="myChart" width="100%" height="80%"></canvas>
 
 </div>
 <script>
@@ -114,6 +118,61 @@
         locat='http://localhost:4000/admin/route/'+get_user+'/'+get_locality;
         console.log(locat);
         window.location.href=locat;
-    }   
+    }
+    fetch('/api/EmployeeIds').then(async(response)=>{
+        console.log("ids")
+        response=await response.json();
+        {{!-- console.log(response) --}}
+        labels=new Set();
+        res_ids=new Set();
+        data_incomplete=new Array();
+        data_complete=new Array();
+        for(let i=0;i<response.length;i++){
+            res_ids.add(response[i].employeeID);
+            labels.add(response[i].employeeName);
+        }
+        console.log(res_ids,labels)
+        for(let i=0;i<Array.from(res_ids).length;i++){
+            fetch('/api/analyticsTasksData/'+Array.from(res_ids)[i]).then(async (res) => {
+                res = await res.json();
+                console.log(res)
+                data_incomplete.push(res["incompleteTasks"]);
+                data_complete.push(res["completedTasks"])
+            }); 
+        }
+        {{!-- console.log(labels,"data",data_complete); --}}
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: Array.from(labels),
+                datasets: [{
+                    label: 'Incomplete tasks of different employees',
+                    data: data_incomplete,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+            }
+        });
+    });
+      
     
 </script>
