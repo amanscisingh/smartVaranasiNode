@@ -24,9 +24,7 @@
     <form>
         <select id="employee_name">
             <option value="employee_name">Select Employee</option>
-            <option value="ram">Ram</option>
-            <option value="shyam">Shyam</option>
-            <option value="karan">Karan</option>
+            <option value="610e892074e2c613744415c1">Drako</option>
         </select>
         <br>
         <select id="zone">
@@ -111,16 +109,11 @@
     function find_bins(){
         var e = document.getElementById("locality");
         var get_locality = e.options[e.selectedIndex].text;
-        get_locality.replaceAll(" ","%20");
-        locat='http://localhost:4000/admin/route/'+get_locality;
+        var get_user = document.getElementById("employee_name").options[document.getElementById("employee_name").selectedIndex].value;
+        console.log(get_user);
+        locat='http://localhost:4000/admin/route/'+get_user+'/'+get_locality;
         console.log(locat);
         window.location.href=locat;
-    }
+    }   
     
-
-        
-        
-    
-    
-
 </script>
