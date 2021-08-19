@@ -47,8 +47,16 @@
         
     </form>
     <canvas id="myChart" width="100%" height="80%"></canvas>
+    <br>
+    <br>
     <canvas id="myChart1" width="100%" height="80%"></canvas>
-
+    <br>
+    <br>
+    <canvas id="myChart2" width="100%" height="80%"></canvas>
+    <br>
+    <br>
+    <canvas id="myChart3" width="100%" height="80%"></canvas>
+    
 </div>
 <script>
     fetch('/api/zone').then(async (response) => {
@@ -123,29 +131,45 @@
 
     {{!-- adding bar graph --}}
     fetch('/api/EmployeeIds').then(async(response)=>{
-        console.log("ids")
+        {{!-- console.log("ids") --}}
         response=await response.json();
         {{!-- console.log(response) --}}
         labels=new Set();
         res_ids=new Set();
         data_incomplete=new Array();
         data_complete=new Array();
+        filled_bins=new Array();
+        empty_bins=new Array();
+        zones = ['Bhelupur', 'Dashaswamedh', 'Varunapar', 'Adampur', 'Kotwali'];
+        
         for(let i=0;i<response.length;i++){
             res_ids.add(response[i].employeeID);
             labels.add(response[i].employeeName);
         }
-        console.log(res_ids,labels)
+        {{!-- console.log(res_ids,labels) --}}
         for(let i=0;i<Array.from(res_ids).length;i++){
             fetch('/api/analyticsTasksData/'+Array.from(res_ids)[i]).then(async (res) => {
                 res = await res.json();
-                console.log(res)
+                {{!-- console.log(res) --}}
                 data_incomplete.push(res["incompleteTasks"]);
                 data_complete.push(res["completedTasks"])
             }); 
         }
-        {{!-- console.log(labels,"data",data_complete); --}}
-        var ctx = document.getElementById('myChart').getContext('2d');
+        fetch('/api/analyticsQueryData').then(async(res)=>{
+            res= await res.json();
+            totalQueries=res["totalQueries"]
+            resolvedQueries=res["resolvedQueries"]
+        })
+        fetch('/api/analyticsBinData').then(async(res2)=>{
+            res2= await res2.json();
+            console.log(res2[zones[0]])
+            for(let i=0;i<5;i++){
+                filled_bins.push(res2[zones[i]]["filled"])
+                empty_bins.push(res2[zones[i]]["empty"])
+            }
+        })
         setTimeout(()=>{
+            var ctx = document.getElementById('myChart').getContext('2d');
             var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -155,19 +179,19 @@
                     data: data_incomplete,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
-                        {{!-- 'rgba(54, 162, 235, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
                         'rgba(255, 206, 86, 0.2)',
                         'rgba(75, 192, 192, 0.2)',
                         'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)' --}}
+                        'rgba(255, 159, 64, 0.2)'
                     ],
                     borderColor: [
                         'rgba(255, 99, 132, 1)',
-                        {{!-- 'rgba(54, 162, 235, 1)',
+                        'rgba(54, 162, 235, 1)',
                         'rgba(255, 206, 86, 1)',
                         'rgba(75, 192, 192, 1)',
                         'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)' --}}
+                        'rgba(255, 159, 64, 1)'
                     ],
                     borderWidth: 1
                 }]
@@ -176,7 +200,128 @@
                 indexAxis: 'y',
             }
         });
-        },800);
+        labels_pie=["totalQueries","resolvedQueries"]
+        var ctx = document.getElementById('myChart1').getContext('2d');
+            var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels_pie,
+                datasets: [{
+                    label: 'Incomplete tasks of different employees',
+                    data: [totalQueries,resolvedQueries],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Query status'
+                    }
+                }
+            },
+        });
+        var ctx = document.getElementById('myChart2').getContext('2d');
+            var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: zones,
+                datasets: [{
+                    label: 'Incomplete tasks of different employees',
+                    data: filled_bins,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Filled bins status'
+                    }
+                }
+            },
+        });
+        var ctx = document.getElementById('myChart3').getContext('2d');
+            var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: zones,
+                datasets: [{
+                    label: 'Incomplete tasks of different employees',
+                    data: empty_bins,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Empty bins status'
+                    }
+                }
+            },
+        });
+        },4000);
     });
       
     
