@@ -49,6 +49,7 @@ body{
 
 form{
     margin: 5px;
+    text-align: center;
 }
 form input{
     padding: 8px;
@@ -171,4 +172,34 @@ h5{
 }
 
 /* CSS for adminRoute ENDS */
+
+
+
+/* css for admin task assign page */
+#submitBtn{
+  font-size: small;
+  padding: 6px;
+  background-color: azure;
+  border: 1px solid black;  
+}
+
+#submitBtn:disabled{
+  color: slategrey;
+  border: 1px solid grey;
+}
+
+#submitBtn:hover{
+  background-color: black;
+  color: white;
+}
+
+
+#submitBtn:disabled:hover{
+  background-color: white;
+  color: slategrey;
+}
+
+
+#shadowedLine{
+}
   

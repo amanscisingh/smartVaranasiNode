@@ -3,7 +3,7 @@
     
 <style>
     .assign_task_form {
-        max-width: 350px;
+        max-width: 100%;
         margin: auto;
         padding: 20px;
     }
@@ -22,9 +22,9 @@
         background: #000;
     }
 </style>
-<h3>admin assign</h3>
+<h3>Assign Tasks to Employees</h3>
 <div class="assign_task_form">
-    <form>
+    <form id="assignTaskForm" method="get">
         <select id="employee_name">
             <option value="employee_name">Select Employee</option>
             <option value="610e892074e2c613744415c1">Drako</option>
@@ -42,10 +42,11 @@
         <select id="locality">
             <option value="locality">Select Locality</option>
         </select>
-        <hr>
         <br>
-        
+        <input id="submitBtn" disabled type="submit" value="Assign Task👍">        
     </form>
+    <hr id="shadowedLine">
+
     <canvas id="myChart" width="100%" height="80%"></canvas>
     <br>
     <br>
@@ -59,28 +60,27 @@
     
 </div>
 <script>
-    fetch('/api/zone').then(async (response) => {
-            response = await response.json();
-            findZones(response);
-    });
-    function findZones(response){
-        ele=document.getElementById("zone");
-        for (let i = 0; i < response.length; i++) {
-            let li=document.createElement('option');
-            li.value=response[i];
-            li.innerText=response[i];
-            ele.appendChild(li);
-        }
+    response = ['Bhelupur', 'Dashaswamedh', 'Varunapar', 'Adampur', 'Kotwali'];
+    ele=document.getElementById("zone");
+    for (let i = 0; i < response.length; i++) {
+        let li=document.createElement('option');
+        li.value=response[i];
+        li.innerText=response[i];
+        ele.appendChild(li);
     }
     
+    var allWards = {
+        "Bhelupur": ["Raneepur","Virdopur","Naria","Bhelupur","Jolha North","Nevada","Nagwa","Bhaidani","Sunderpur","Shivwala","Nawabganj","Baaghada","Saraisurjan","Jolha South","Bajardiha","Pandey Haweli","Reori Talab","Khojwa"],
+        "Dashaswamedh" : ["Shivpurwa","Madanpura","Sigra","Jagatganj","Lallapura Khurd","Chhittupur","Jangambadi","Lahartara","Tulsipur","Pandey Haweli","Nadesar","Laksha","Ramapura","Reori Talab","Habibpura","Chetganj","Saray Gowardhan","Lahagpura","Ishwargangi"],
+        "Varunapar" : ["Pandeypur","Dithori Mahal","Raja Bazar","Hukulganj","Akatha","Sarsauli","Sikraul","Narayanpur","Khajuri","Paharia","Nadesar","Jagatganj","Ramareypur","Nai Basti","Chowka Ghat","Lahartara","Shivpur","Danialpur","Tarna","Indrapur","Sarnath"],
+        "Adampur" : ["Rajghat","Zalalipura","Dhoopchandi","Kaji Sadullapura","Jamaluddinpura","Alaipura","Koniya","Saraiya","Onkaleshwar","Nawapura","Kamalgaraha","","Rasoolpura"],
+        "Kotwali" : ["Piyari Kala","Dashashwamedh","Ishwargangi","Hadha","Beniya","Goladinanath","Madhyameshwar","Katuapura"]
+    }
     document.getElementById("zone").onchange = find_wards;
     function find_wards(){
         var e = document.getElementById("zone");
         var get_zone = e.options[e.selectedIndex].text;
-        fetch('/api/zone/'+get_zone).then(async (response) => {
-            response = await response.json();
-            findWards(response);
-        });
+        findWards(allWards[get_zone]);
     }
     
     function findWards(response) {
@@ -120,13 +120,14 @@
     document.getElementById("locality").onchange = find_bins;
     
     function find_bins(){
+        const form = document.getElementById("assignTaskForm");
+        const submitBtn = document.getElementById("submitBtn");
         var e = document.getElementById("locality");
         var get_locality = e.options[e.selectedIndex].text;
         var get_user = document.getElementById("employee_name").options[document.getElementById("employee_name").selectedIndex].value;
         console.log(get_user);
-        locat='http://localhost:4000/admin/route/'+get_user+'/'+get_locality;
-        console.log(locat);
-        window.location.href=locat;
+        form.setAttribute('action', '/admin/route/'+get_user+'/'+get_locality);
+        submitBtn.removeAttribute('disabled');
     }
 
     {{!-- adding bar graph --}}

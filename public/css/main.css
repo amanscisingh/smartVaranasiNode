@@ -2,7 +2,7 @@ body {
     height: 100%;
     width: 100%;
     position: absolute;
-    color: white;
+    color: black;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
@@ -39,8 +39,7 @@ a{
 
 .container{
     height: 90%;
-    background-image: url('../images/homeBg.jpeg');
-    background-color: rgba(0, 0, 0, .4);
+    background-color: white;
     background-position: center;
     background-size: cover;
     background-blend-mode: darken;
@@ -51,7 +50,7 @@ a{
 
 .control1{
     display: grid;
-    height: 10%;
+    height: 9%;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     width: 100%;
     justify-items: center;
@@ -244,3 +243,6 @@ form{
     overflow-y: scroll;
     text-align: center;
 }
+
+
+
