@@ -1,0 +1,23 @@
+<h3>Create Broadcasts</h3>
+
+<div class="form">
+    <form id='broadcastForm' method="POST">
+        <label for="title" style="margin: 10px;"> Broadcast Title: </label>
+        <br>
+        <input style="height: 5px; margin: 10px;" type="text" name="title" id="title" required>
+        <br>
+        <label for="description"> Broadcast Message: </label>
+        <br>
+        <textarea style="width: 180px; height: 100px; margin: 10px;" name="description" id="description" required></textarea>
+        <br>
+        <input id="sendBroadcast" style="visibility: hidden; text-align: center;" type="submit" value="Create Broadcast">
+    </form>
+</div>
+
+
+<script>
+    const broadcastForm = document.getElementById('broadcastForm');
+    const url = '/admin/broadcast?id=' + localStorage.getItem('userId');
+    broadcastForm.setAttribute('action', url);
+    document.getElementById('sendBroadcast').style.visibility  = 'visible';
+</script>

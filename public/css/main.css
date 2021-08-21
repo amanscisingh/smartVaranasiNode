@@ -246,3 +246,13 @@ form{
 
 
 
+/* css for home */
+#homeTop{
+    width: 100%;
+    height: 65%;
+}
+
+#homeBottom{
+    width: 100%;
+    height: 25%;
+}

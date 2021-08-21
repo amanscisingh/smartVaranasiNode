@@ -3,6 +3,7 @@ const apiRoute = express.Router();
 import Bin from '../model/bin-schema.js';
 import Tasks from '../model/tasks.js'
 import QueryData from '../model/query-data.js'
+import Broadcasts from '../model/broadcasts.js'
 
 // get wards on input of zone
 apiRoute.get('/zone/:zone', async (req, res) => {
@@ -127,4 +128,16 @@ apiRoute.get('/analyticsBinData', async (req, res) => {
     }
 });
 
+
+// get top 3 broadcasts..
+apiRoute.get('/topBroadcasts', async (req, res) => {
+    try {
+        var data = await Broadcasts.find().lean();
+        res.json(data.slice(-3));
+        
+    } catch (error) {
+        console.log(error);
+        res.redirect('/');
+    }
+})
 export default apiRoute;

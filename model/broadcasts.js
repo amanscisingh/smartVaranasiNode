@@ -1,4 +1,4 @@
-import mongoose, { Collection } from 'mongoose';
+import mongoose from 'mongoose';
 
 const Boradcasts = new mongoose.Schema({
     title: {

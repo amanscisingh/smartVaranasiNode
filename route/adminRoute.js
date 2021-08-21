@@ -5,6 +5,7 @@ import bin from '../model/bin-schema.js';
 import Tasks from '../model/tasks.js'
 import Users from '../model/user.js'
 import mongoose from 'mongoose';
+import Broadcasts from '../model/broadcasts.js'
 
 
 adminRoute.get('/', async (req, res) => {
@@ -80,6 +81,33 @@ adminRoute.post('/route/:employeeID', async (req, res) => {
         res.json({"error": error.message});
     }
 });
+
+// route for broadcast page @GET
+adminRoute.get('/broadcast', async (req, res) => {
+    try {
+        res.render( 'adminBroadcast', { layout: 'adminLayout' });
+    } catch (error) {
+        res.send(error);
+    }
+})
+
+
+// goute for post request to add a broadcast
+adminRoute.post('/broadcast', async (req, res) => {
+    try {
+        const adminId = req.query.id;
+        console.log(adminId);
+        var broadcast = new Broadcasts({
+            title: req.body.title,
+            description: req.body.description,
+            adminId: adminId,
+        });
+        await broadcast.save();
+        res.redirect('/admin/broadcast');
+    } catch (error) {
+        res.send(error);
+    }
+})
 
 
 

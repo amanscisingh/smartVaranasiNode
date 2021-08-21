@@ -11,6 +11,7 @@ html{
 /* CSS for default layout */
 body{
     height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
     width: 100%;
     position: absolute;
     color: rgb(0, 0, 0);
@@ -56,22 +57,19 @@ form input{
     border-radius: 3px;
 }
 
-  body{
-      background-color: aquamarine;
-      font-family: Arial, Helvetica, sans-serif;
-  }
-  h3{
-      text-align: center;
-  }
- 
-  button{
-      background-color: blue;
-      color: white;
-      padding: 8px;
-      font-family: 'Times New Roman', Times, serif;
-      font-size: large;
-      border-radius: 5px;
-  }
+
+h3{
+    text-align: center;
+}
+
+button{
+    background-color: blue;
+    color: white;
+    padding: 8px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: large;
+    border-radius: 5px;
+}
 
 
   /* dropdown css */
@@ -200,6 +198,12 @@ h5{
 }
 
 
-#shadowedLine{
+/* css for create broadcast */
+.form{
+  font-size: 18px;
+
 }
-  
+
+
+
+

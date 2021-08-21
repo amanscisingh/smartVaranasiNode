@@ -1,8 +1,13 @@
 
+<div id="homeTop">
+    <span style="float: left; margin: 10px; padding: 5px; border: black 1px solid;"><a style="color: black; text-decoration: none" href="/admin/tasks">Admin Panel</a></span>
+    <span style="float: right; margin: 10px; padding: 5px; border: black 1px solid;"><a style="color: black; text-decoration: none" href="#" id="taskBtn">Employeee Panel</a></span>
+</div>
 
-<span style="float: left; margin: 10px; padding: 5px; border: black 1px solid;"><a style="color: black; text-decoration: none" href="/admin/tasks">Admin Panel</a></span>
-<span style="float: right; margin: 10px; padding: 5px; border: black 1px solid;"><a style="color: black; text-decoration: none" href="#" id="taskBtn">Employeee Panel</a></span>
-
+<div id="homeBottom">
+    <hr>
+    All broadcasts will appear here...
+</div>
 
 <script>
 
@@ -14,6 +19,50 @@
         taskBtn.href = '/employee/tasks/' + localStorage.getItem('userId');
         console.log(localStorage.getItem('userId'));  
     }, 100);
+
+    const homeBottom = document.getElementById('homeBottom');
+    const ul = document.createElement('ul');
+    fetch('/api/topBroadcasts').then(res => res.json()).then(data => {
+        
+        var li1 = document.createElement('li');
+        li1.innerHTML = data[2].title;
+        function fun1 () {
+            if (li1.innerHTML === data[2].title) {
+                li1.innerHTML = data[2].title + '<br>' + data[2].description;
+            } else {
+                li1.innerHTML = data[2].title;
+            }
+            fun1()
+        }
+        var li2 = document.createElement('li');
+        li2.innerHTML = data[1].title;
+        function fun2 () {
+            if (li1.innerHTML === data[1].title) {
+                li1.innerHTML = data[1].title + '<br>' + data[1].description;
+            } else {
+                li1.innerHTML = data[1].title;
+            }
+            fun2()
+        }
+        var li3 = document.createElement('li');
+        li3.innerHTML = data[0].title;
+        
+        function fun3 () {
+            if (li1.innerHTML === data[0].title) {
+                li1.innerHTML = data[0].title + '<br>' + data[0].description;
+            } else {
+                li1.innerHTML = data[0].title;
+            }
+            fun3()
+        }       
+        fun1();
+        fun2();
+        fun3();
+        ul.appendChild(li1);
+        ul.appendChild(li2);
+        ul.appendChild(li3);
+        homeBottom.appendChild(ul);
+    })
 
 
 </script>
