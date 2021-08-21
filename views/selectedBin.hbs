@@ -2,32 +2,31 @@
     <div id="bin-info">Locality - {{ LOCALITY }}
         <br>
         <div class="imgs">
-            <img src="">
-            <img src="">
-            <img src="">
-            <img src="">
+            <img class="binImages" src="https://via.placeholder.com/70">
+            <img class="binImages" src="https://via.placeholder.com/70">
+            <img class="binImages" src="https://via.placeholder.com/70">
+            <img class="binImages" src="https://via.placeholder.com/70">
+            <span style="padding: 10px;">➕</span>
         </div>
-        <div style="text-align: left;">
-            <ul>
-                <li>
-                    Status - {{ Status }}
-                    {{!-- Status - Empty --}}
-                </li>
-            </ul>
+        <div style="text-align: center; margin-top: 15px;">
+            
+            Status - <span id="statusValue">{{ Status }}</span>
+                
         </div>
     </div>
     <hr>
     <div class="center">
-        User Activity
+        <span>Select Status of Bins to Update</span>
         <br>
         
         <div class="buttons">
-            <form action="/waste/{{_id}}" method="POST">
+            <form action="/waste/{{_id}}" method="POST" style="margin: 6px auto">
                 <input type='hidden' name='_method' value='PUT'>
                 <input type="radio" name="choice" id="choice1" value="filled">
-                <label for="choice1">Filled</label>
+                <label for="choice1">Mark Filled</label>
+                <br>
                 <input type="radio" name="choice" id="choice2" value="empty">
-                <label for="choice2">Empty</label>
+                <label for="choice2"> Mark Empty </label>
                 <br>
                 <button class="btn1" type="submit">Update Status</button>
             </form>
@@ -36,12 +35,24 @@
         <br>
 
         {{!-- form for reporting information... --}}
-        <form id="form" method="POST" action="/waste/{{_id}}">
-            <label for="report">Report Incident:</label><br>
-            <textarea name="report" class="report" placeholder="write your report here..."></textarea>
+        <form id="form" method="POST" action="/waste/{{_id}}" style="text-align: center;">
+            <label for="report">Report any Incident/Complaint regarding this Bin</label><br>
+            <textarea style="height: 75px; width: 72%; margin-top: 5px;" name="report" class="report" placeholder="type here..."></textarea>
             <br>
-            <button id="submit" type="submit">Submit</button>
+            <button class="btn1" id="submit" type="submit">Submit</button>
         </form>
     </div>
 
 </div>
+
+
+<script>
+    const statusValue = document.getElementById('statusValue');
+    if (statusValue.innerText === 'empty') {
+        statusValue.style.backgroundColor = '#82ff81';
+        statusValue.style.padding = '7px'
+    } else {
+        statusValue.style.backgroundColor = 'red';
+        statusValue.style.padding = '7px'
+    }
+</script>

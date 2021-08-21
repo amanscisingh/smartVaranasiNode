@@ -6,7 +6,7 @@
 
 <div id="homeBottom">
     <hr>
-    All broadcasts will appear here...
+    <span style="float: center; margin: 10px; padding: 5px; border: black 1px solid;"><a style="color: black; text-decoration: none" href="/admin/tasks">Broadcast Panel</a></span>
 </div>
 
 <script>
@@ -25,36 +25,57 @@
     fetch('/api/topBroadcasts').then(res => res.json()).then(data => {
         
         var li1 = document.createElement('li');
-        li1.innerHTML = data[2].title;
+        li1.innerHTML = data[2].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[2].date.slice(0, 10) + '</span>';
         function fun1 () {
-            if (li1.innerHTML === data[2].title) {
-                li1.innerHTML = data[2].title + '<br>' + data[2].description;
+            if (li1.innerHTML === data[2].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[2].date.slice(0, 10) + '</span>') {
+                li1.addEventListener('click', () => {
+                    li1.innerHTML =data[2].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[2].date.slice(0, 10) + '</span>' + '<br>' + data[2].description;
+                    fun1();
+                })
             } else {
-                li1.innerHTML = data[2].title;
+                li1.addEventListener('click', () => {
+                    li1.innerHTML =data[2].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[2].date.slice(0, 10) + '</span>';
+                    fun1();
+                })
             }
-            fun1()
         }
+
+
         var li2 = document.createElement('li');
-        li2.innerHTML = data[1].title;
+        li2.innerHTML = data[1].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[1].date.slice(0, 10) + '</span>';
         function fun2 () {
-            if (li1.innerHTML === data[1].title) {
-                li1.innerHTML = data[1].title + '<br>' + data[1].description;
+            if (li2.innerHTML === data[1].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[1].date.slice(0, 10) + '</span>') {
+                li2.addEventListener('click', () => {
+                    li2.innerHTML = data[1].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[1].date.slice(0, 10) + '</span>' + '<br>' + data[1].description;
+                    fun2();
+                })
             } else {
-                li1.innerHTML = data[1].title;
+                li2.addEventListener('click', () => {
+                    li2.innerHTML = data[1].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[1].date.slice(0, 10) + '</span>';
+                    fun2();
+                })
             }
-            fun2()
         }
+
+
         var li3 = document.createElement('li');
-        li3.innerHTML = data[0].title;
+        li3.innerHTML = data[0].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[0].date.slice(0, 10) + '</span>';
         
         function fun3 () {
-            if (li1.innerHTML === data[0].title) {
-                li1.innerHTML = data[0].title + '<br>' + data[0].description;
+            if (li3.innerHTML === data[0].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[0].date.slice(0, 10) + '</span>') {
+                li3.addEventListener('click', () => {
+                    li3.innerHTML = data[0].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[0].date.slice(0, 10) + '</span>' + '<br>' + data[0].description;
+                    fun3();
+                })
             } else {
-                li1.innerHTML = data[0].title;
+                li3.addEventListener('click', () => {
+                    li3.innerHTML = data[0].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[0].date.slice(0, 10) + '</span>';
+                    fun3();
+                })
             }
-            fun3()
-        }       
+        }   
+
+
         fun1();
         fun2();
         fun3();
