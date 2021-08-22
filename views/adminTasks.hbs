@@ -1,6 +1,6 @@
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
-    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+
 
 
 {{!-- style is here --}}
@@ -25,15 +25,20 @@
         background: #000;
     }
     select{
-        background-color: #999999;
-        color: white;
+        border: 0.5px solid grey;
     }
 </style>
 
 
+<span style="float: left;">
+    <a href="/admin/broadcast" style="text-decoration: none; float: right; margin: 10px; padding: 5px; border: black 1px solid;">Create Broadcast</a>
+</span>
+<span style="float: right;">
+    <a href="/admin/response" style="text-decoration: none; float: right; margin: 10px; padding: 5px; border: black 1px solid;">Respond To Queries</a>
+</span>
+<br>
+<h3>Assign Tasks to Employees</h3>
 
-<span style="float: left; margin: 10px"><h3>Assign Tasks to Employees</h3> </span>
-<a href="/admin/broadcast" style="text-decoration: none; float: right; margin: 10px; padding: 5px; border: black 1px solid;">💨</a>
 <div class="assign_task_form">
     <form id="assignTaskForm" method="get">
         <select id="employee_name">
@@ -59,16 +64,16 @@
     </form>
     <hr id="shadowedLine">
 
-    <canvas id="myChart" width="100%" height="80%"></canvas>
+    <div class="canvasElement"><canvas id="myChart" width="100%" height="80%"></canvas></div>
     <br>
     <br>
-    <canvas id="myChart1" width="100%" height="80%"></canvas>
+    <div class="canvasElement"><canvas id="myChart1" width="100%" height="80%"></canvas></div>
     <br>
     <br>
-    <canvas id="myChart2" width="100%" height="80%"></canvas>
+    <div class="canvasElement"><canvas id="myChart2" width="100%" height="80%"></canvas></div>
     <br>
     <br>
-    <canvas id="myChart3" width="100%" height="80%"></canvas>
+    <div class="canvasElement"><canvas id="myChart3" width="100%" height="80%"></canvas></div>
     
 </div>
 
@@ -177,6 +182,7 @@
             totalQueries=res["totalQueries"]
             resolvedQueries=res["resolvedQueries"]
         })
+        var res2;
         fetch('/api/analyticsBinData').then(async(res2)=>{
             res2= await res2.json();
             console.log(res2[zones[0]])

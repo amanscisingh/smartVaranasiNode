@@ -8,20 +8,6 @@ import mongoose from 'mongoose';
 import Broadcasts from '../model/broadcasts.js'
 
 
-adminRoute.get('/', async (req, res) => {
-    try {
-        var data;
-        if (req.query.WARD === undefined) {
-            data = await queryData.find().lean();
-        } else {
-            data = await queryData.find({ binWard: req.query.WARD }).lean();
-        }
-        
-        res.render('admin1', { layout: 'adminLayout', data: data });
-    } catch (error) {
-        console.log(error);        
-    }
-});
 
 adminRoute.put('/:id', async (req, res)=> {
     const adminResponse = req.body.report;
@@ -90,6 +76,23 @@ adminRoute.get('/broadcast', async (req, res) => {
         res.send(error);
     }
 })
+
+
+// route for reesponse page...
+adminRoute.get('/response', async (req, res) => {
+    try {
+        var data;
+        if (req.query.WARD === undefined) {
+            data = await queryData.find().lean();
+        } else {
+            data = await queryData.find({ binWard: req.query.WARD }).lean();
+        }
+        
+        res.render('adminRespondToQueries', { layout: 'adminLayout', data: data });
+    } catch (error) {
+        console.log(error);        
+    }
+});
 
 
 // goute for post request to add a broadcast
