@@ -9,8 +9,19 @@ defaultRoute.get('/', ensureGuest, (req, res) => {
 });
 
 defaultRoute.get('/home', ensureAuth, (req, res) => {
+    
     res.render('home');
 });
+
+
+defaultRoute.get('/traffic', (req, res) => {
+    res.render('underConstruction');
+})
+
+defaultRoute.get('/pollution', (req, res) => {
+    res.render('underConstruction');
+})
+
 
 
 // testing purpose code...

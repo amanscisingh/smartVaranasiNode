@@ -7,64 +7,76 @@ async function getAllBins(url){
 
 //using fetch to make get request to get all bin data...
 //use the data to create markers on the map
-const data = getAllBins("http://localhost:4000/get");
+var data;
+if (localStorage.getItem('mapData') === null) {
+  data = getAllBins("http://localhost:4000/get").then((allBins) => {
+    localStorage.setItem('mapData', JSON.stringify(allBins));
+    console.log('data addded to LS');
+  })
+} else {
+  data = JSON.parse(localStorage.getItem('mapData'));
+  console.log('data loaded from LS');
+}
+
 
 var infowindow;
 
 function initMap(){
+  console.log('init map ran');
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 25.319, lng: 82.965 },
         zoom: 12.5,
         mapId: '4719b11c4529a336'
       });
 
-    
-
-    const iconBase =
-      "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
-    const icons = {
-      fullbin: {
-        icon: iconBase + "parking_lot_maps.png",
-      },
-      emptybin: {
-        icon: iconBase + "library_maps.png",}
-      }
 
     const features = [
         {
           position: new google.maps.LatLng(25.283165, 82.969402),
-          type: "fullbin"
+          type: "filled"
           
         }]
-    getAllBins("http://localhost:4000/get").then((allBins) => {
-      // console.log(allBins);
-      for(var i = 0; i < 2000; i++){
-        features.push({
-          position: new google.maps.LatLng(Number(allBins[i].LNG), Number(allBins[i].LAT)),
-          type: "fullbin",
-          id: allBins[i]._id
-        });
-      };
 
-      for (let i = 0; i < features.length; i++) {
+    for(var i = 0; i < 2000; i++){
+      features.push({
+        position: new google.maps.LatLng(Number(data[i].LNG), Number(data[i].LAT)),
+        type: data[i].Status,
+        id: data[i]._id
+      });
+    };
+
+    for (let i = 0; i < features.length; i++) {
+      if (features[i].type === 'empty') {
         var marker = new google.maps.Marker({
           position: features[i].position,
-          icon: icons[features[i].type].icon,
+          icon: "../images/empty.png",
           map: map,
         });
-        marker.addListener('click', ()=> {
-          location.href = `http://localhost:4000/waste/${features[i].id}`;
+      } else {
+        var marker = new google.maps.Marker({
+          position: features[i].position,
+          icon: "../images/filled.png",
+          map: map,
         });
       }
+      
+      marker.addListener('click', ()=> {
+        location.href = `http://localhost:4000/waste/${features[i].id}`;
+      });
+    }
+
+    setTimeout(()=> {
+      data = getAllBins("http://localhost:4000/get").then((allBins) => {
+        localStorage.setItem('mapData', JSON.stringify(allBins));
+        console.log('data updated to LS');
+        // initMap();
+        
+      })
+    }, 5000);
 
         
-        infowindow = new google.maps.InfoWindow();
-    })
+    infowindow = new google.maps.InfoWindow();
     
-
-
-
-        
            
   function makeInfoWindowEvent(map, infowindow,contentString, marker) {
       google.maps.event.addListener(marker, 'click', function() {
