@@ -31,6 +31,7 @@ profileRoute.put('/api/:id', async (req, res) => {
         var user = await User.findById(id).lean();
         user.name = req.body.name;
         user.email = req.body.email;
+        user.phone = req.body.phone;
         user = await User.findOneAndUpdate( { _id: id },  user, { new: true, runValidators: true } );
         console.log(user);
         res.redirect('/profile/' + id);
