@@ -1,7 +1,7 @@
 <div id="user">
     <div class="top-section">
-        <span style="float: left;">Profile</span>
-        <span style="float: right;"><a style="text-decoration: none; color: tomato" href="/auth/logout">LOGOUT</a></span>
+        {{!-- <span style="float: left; margin: 10px; padding: 5px; border: black 1px solid;">Profile</span> --}}
+        <span style="float: right; margin: 10px; padding: 5px; border: black 1px solid;"><a style="text-decoration: none;" href="/auth/logout">LOGOUT</a></span>
     </div>
     <div class="middle-section">
         <img src="{{user.image}}" alt="{{user.firstName}}" id="profileImage" />
@@ -14,10 +14,12 @@
             <input type='text' name='lastName' value='{{user.lastName}}' placeholder="Last Name">
             <input type='text' name='email' value='{{user.email}}' placeholder="E-Mail">
             <input type='text' name='phone' value='{{user.phone}}' placeholder="Mob. No.">
-            <input type="submit" value="Update">
+            <br>
+            <input style="margin-top: 10px;" type="submit" value="Update">
         </form>
     </div>
 </div>
+<hr>
 
 
 <div id="queries">

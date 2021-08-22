@@ -1,3 +1,12 @@
 <div class="comingSoonContainer">
+    <div class="comingSoonText">
+        Coming Soon
+    </div>
     
 </div>
+<script>
+    setTimeout(() => {
+        var profileBtn = document.getElementById('profileBtn');
+        profileBtn.href = '/profile/' + localStorage.getItem('userId');   
+    }, 500);
+</script>

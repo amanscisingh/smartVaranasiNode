@@ -6,7 +6,7 @@
 
 <div id="homeBottom">
     <hr>
-    <span style="float: center; margin: 10px; padding: 5px; border: black 1px solid;"><a style="color: black; text-decoration: none" href="/admin/tasks">Broadcast Panel</a></span>
+    <span style="float: center; margin: 10px; padding: 5px; border: black 1px solid;"><a style="color: black; text-decoration: none" href="/admin/tasks">Recent Broadcasts</a></span>
 </div>
 
 <script>
@@ -17,73 +17,52 @@
         var profileBtn = document.getElementById('profileBtn');
         profileBtn.href = '/profile/' + localStorage.getItem('userId'); 
         taskBtn.href = '/employee/tasks/' + localStorage.getItem('userId');
-        console.log(localStorage.getItem('userId'));  
     }, 100);
 
     const homeBottom = document.getElementById('homeBottom');
     const ul = document.createElement('ul');
     fetch('/api/topBroadcasts').then(res => res.json()).then(data => {
-        
+        a=data[0];
+        b=data[1];
+        c=data[2];
         var li1 = document.createElement('li');
-        li1.innerHTML = data[2].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[2].date.slice(0, 10) + '</span>';
-        function fun1 () {
-            if (li1.innerHTML === data[2].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[2].date.slice(0, 10) + '</span>') {
-                li1.addEventListener('click', () => {
-                    li1.innerHTML =data[2].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[2].date.slice(0, 10) + '</span>' + '<br>' + data[2].description;
-                    fun1();
-                })
-            } else {
-                li1.addEventListener('click', () => {
-                    li1.innerHTML =data[2].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[2].date.slice(0, 10) + '</span>';
-                    fun1();
-                })
+        li1.innerHTML = c.title;
+        li1.addEventListener('click',()=>{
+            if(li1.innerHTML===c.title){
+                li1.innerHTML=`<i>`+c.title+`</i>`+`<br>`+c.description;
             }
-        }
-
-
+            else{
+                li1.innerHTML=c.title;
+            }
+        })
         var li2 = document.createElement('li');
-        li2.innerHTML = data[1].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[1].date.slice(0, 10) + '</span>';
-        function fun2 () {
-            if (li2.innerHTML === data[1].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[1].date.slice(0, 10) + '</span>') {
-                li2.addEventListener('click', () => {
-                    li2.innerHTML = data[1].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[1].date.slice(0, 10) + '</span>' + '<br>' + data[1].description;
-                    fun2();
-                })
-            } else {
-                li2.addEventListener('click', () => {
-                    li2.innerHTML = data[1].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[1].date.slice(0, 10) + '</span>';
-                    fun2();
-                })
+        li2.innerHTML = b.title;
+        li2.addEventListener('click',()=>{
+            if(li2.innerHTML===b.title){
+                li2.innerHTML=`<i>`+b.title+`</i>`+`<br>`+b.description;
             }
-        }
-
-
+            else{
+                li2.innerHTML=b.title;
+            }
+        })
         var li3 = document.createElement('li');
-        li3.innerHTML = data[0].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[0].date.slice(0, 10) + '</span>';
-        
-        function fun3 () {
-            if (li3.innerHTML === data[0].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[0].date.slice(0, 10) + '</span>') {
-                li3.addEventListener('click', () => {
-                    li3.innerHTML = data[0].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[0].date.slice(0, 10) + '</span>' + '<br>' + data[0].description;
-                    fun3();
-                })
-            } else {
-                li3.addEventListener('click', () => {
-                    li3.innerHTML = data[0].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[0].date.slice(0, 10) + '</span>';
-                    fun3();
-                })
+        li3.innerHTML = a.title;
+        li3.addEventListener('click',()=>{
+            if(li3.innerHTML===a.title){
+                li3.innerHTML=`<i>`+a.title+`</i>`+`<br>`+a.description;
             }
-        }   
-
-
-        fun1();
-        fun2();
-        fun3();
+            else{
+                li3.innerHTML=a.title;
+            }
+        })
         ul.appendChild(li1);
         ul.appendChild(li2);
         ul.appendChild(li3);
         homeBottom.appendChild(ul);
-    })
+    
+    });
+        
+        
 
 
 </script>
