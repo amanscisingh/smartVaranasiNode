@@ -175,16 +175,18 @@ h5{
 
 /* css for admin task assign page */
 #submitBtn{
-  font-size: small;
+  font-size: large;
   padding: 6px;
-  background-color: azure;
-  border: 1px solid black;  
+  margin: 8px;
+  background-color: #7E7E7E;
+  border: 1px solid black;
+  color: white;  
 }
 
-#submitBtn:disabled{
+/* #submitBtn:disabled{
   color: slategrey;
   border: 1px solid grey;
-}
+} */
 
 #submitBtn:hover{
   background-color: black;

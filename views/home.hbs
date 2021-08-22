@@ -26,7 +26,6 @@
         b=data[1];
         c=data[2];
         var li1 = document.createElement('li');
-<<<<<<< HEAD
         li1.innerHTML = c.title;
         li1.addEventListener('click',()=>{
             if(li1.innerHTML===c.title){
@@ -56,62 +55,6 @@
                 li3.innerHTML=a.title;
             }
         })
-=======
-        li1.innerHTML = data[2].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[2].date.slice(0, 10) + '</span>';
-        function fun1 () {
-            if (li1.innerHTML === data[2].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[2].date.slice(0, 10) + '</span>') {
-                li1.addEventListener('click', () => {
-                    li1.innerHTML =data[2].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[2].date.slice(0, 10) + '</span>' + '<br>' + data[2].description;
-                    fun1();
-                })
-            } else {
-                li1.addEventListener('click', () => {
-                    li1.innerHTML =data[2].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[2].date.slice(0, 10) + '</span>';
-                    fun1();
-                })
-            }
-        }
-
-
-        var li2 = document.createElement('li');
-        li2.innerHTML = data[1].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[1].date.slice(0, 10) + '</span>';
-        function fun2 () {
-            if (li2.innerHTML === data[1].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[1].date.slice(0, 10) + '</span>') {
-                li2.addEventListener('click', () => {
-                    li2.innerHTML = data[1].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[1].date.slice(0, 10) + '</span>' + '<br>' + data[1].description;
-                    fun2();
-                })
-            } else {
-                li2.addEventListener('click', () => {
-                    li2.innerHTML = data[1].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[1].date.slice(0, 10) + '</span>';
-                    fun2();
-                })
-            }
-        }
-
-
-        var li3 = document.createElement('li');
-        li3.innerHTML = data[0].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[0].date.slice(0, 10) + '</span>';
-        
-        function fun3 () {
-            if (li3.innerHTML === data[0].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[0].date.slice(0, 10) + '</span>') {
-                li3.addEventListener('click', () => {
-                    li3.innerHTML = data[0].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[0].date.slice(0, 10) + '</span>' + '<br>' + data[0].description;
-                    fun3();
-                })
-            } else {
-                li3.addEventListener('click', () => {
-                    li3.innerHTML = data[0].title + '<span style="font-size: small; float:right; padding:4px;"> - ' + data[0].date.slice(0, 10) + '</span>';
-                    fun3();
-                })
-            }
-        }   
-
-
-        fun1();
-        fun2();
-        fun3();
->>>>>>> 7b3be0f6bab18fad0cccabd8c4800bee7b799e90
         ul.appendChild(li1);
         ul.appendChild(li2);
         ul.appendChild(li3);
