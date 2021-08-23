@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="manifest" href="/javascript/manifest.webmanifest">
+    <meta name="theme-color" content="#95B6E2"/>
     <title>Smart City Varanasi</title>
     
 </head>
@@ -20,7 +22,7 @@
             
             <div class="control-element"> <a href="/pollution"> <img src="/images/POLLUTION.png" alt="Pollution Logo"> </a> </div>
             
-            <div class="control-element"> <a href="/"> <img src="/images/HOME.jpeg" alt="Home Logo"> </a> </div>
+            <div class="control-element"> <a href="/home"> <img src="/images/HOME.jpeg" alt="Home Logo"> </a> </div>
             
             <div class="control-element"> <a href="/traffic"> <img src="/images/TRAFFIC.png" alt="Traffic Logo"> </a> </div>
             
@@ -33,6 +35,22 @@
             var profileBtn = document.getElementById('profileBtn');
             profileBtn.href = '/profile/' + localStorage.getItem('userId');   
         }, 500);
+
+
+        // Service workers
+        document.addEventListener('DOMContentLoaded', init, false);
+        function init() {
+            console.log('ntng');
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js')
+                .then((reg) => {
+                    console.log('Service worker registered -->', reg);
+                }, (err) => {
+                    console.error('Service worker not registered -->', err);
+                });
+            }
+        }
+
     </script>
 
     
