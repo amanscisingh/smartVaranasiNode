@@ -72,7 +72,7 @@ function initMap(){
         // initMap();
         
       })
-    }, 5000);
+    }, 3000);
 
         
     infowindow = new google.maps.InfoWindow();

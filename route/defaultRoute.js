@@ -1,14 +1,13 @@
 import express from 'express';
 const defaultRoute = express.Router();
 import bin from '../model/bin-schema.js';
-import { ensureAuth, ensureGuest } from '../middleware/auth.js';
 
 
-defaultRoute.get('/', ensureGuest, (req, res) => {
+defaultRoute.get('/', (req, res) => {
     res.render('intro', { layout : 'blank' });
 });
 
-defaultRoute.get('/home', ensureAuth, (req, res) => {
+defaultRoute.get('/home', (req, res) => {
     
     res.render('home');
 });

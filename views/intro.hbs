@@ -1,3 +1,32 @@
-<a href="/auth/google" class="logInBtn"> 
+{{!-- <a href="/auth/google/url" class="logInBtn"> 
     <b style="display: flex; flex-direction:row; justify-content: center; padding-top: 370px;"> <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" style="height: 25px; width:25px; margin-right: 6px;"/>  LOGIN WITH GOOGLE</b>
-</a>
+</a> --}}
+
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+<a href="/auth/logout" onclick="signOut();">Sign out</a>
+
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script>
+    function onSignIn(googleUser) {
+        var id_token = googleUser.getAuthResponse().id_token;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/auth/login');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+            console.log('Signed in as: ' + xhr.responseText);
+            if (xhr.responseText == 'success') {
+                // signOut();
+                location.assign('/home');
+            };
+        };
+        xhr.send(JSON.stringify({ token: id_token }));
+    }
+
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+        console.log('User signed out.');
+        });
+    }
+</script>

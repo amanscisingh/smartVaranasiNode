@@ -5,11 +5,11 @@ import Query from '../model/query-data.js';
 
 
 // General Routes
-profileRoute.get('/:id', async (req, res) => {   
+profileRoute.get('/', async (req, res) => {   
     try {
-        const id = req.params.id;
-        const user = await User.findById(id).lean();
-        const data = await Query.find({}).where( {"report.user" : id} ).lean();
+        const googleId = req.cookies['user-id'];
+        const user = await User.findOne( { googleId: googleId } ).lean();
+        const data = await Query.find({}).where( {"report.user" : user['_id'] } ).lean();
         
         res.render('profile', {
             user: user,
@@ -25,14 +25,14 @@ profileRoute.get('/:id', async (req, res) => {
 // APIs for data upload...
 
 // PUT API for data update...
-profileRoute.put('/api/:id', async (req, res) => {
+profileRoute.put('/api', async (req, res) => {
     try {
-        const id = req.params.id;
-        var user = await User.findById(id).lean();
+        const googleId = req.cookies['user-id'];
+        var user = await User.findOne( { googleId: googleId } ).lean();
         user.name = req.body.name;
         user.email = req.body.email;
         user.phone = req.body.phone;
-        user = await User.findOneAndUpdate( { _id: id },  user, { new: true, runValidators: true } );
+        user = await User.findOneAndUpdate( { _id: user['_id'] },  user, { new: true, runValidators: true } );
         console.log(user);
         res.redirect('/profile/' + id);
     } catch (error) {

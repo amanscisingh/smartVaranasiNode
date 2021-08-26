@@ -4,7 +4,7 @@
 <hr>
     <div class="task">
         <span style="float: left;"> {{indexing @key}}: {{this.taskName}}</span>
-        <a href='/employee/tasks/{{this.employeeID}}/{{@key}}/map/?t={{this.taskName}}'> <span style="float: right;">🎯</span></a> <br>
+        <a href='/employee/tasks/{{@key}}/map/?t={{this.taskName}}'> <span style="float: right;">🎯</span></a> <br>
         <p>{{this.taskArray}}</p>
         <p>{{this.taskStatus}}</p>
     </div>

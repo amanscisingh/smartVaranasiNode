@@ -14,16 +14,13 @@ import authRoute from './route/authRoute.js';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import dotenv from 'dotenv';
-import passport from 'passport';
-import session from 'express-session';
-import MongoStore from 'connect-mongo';
+import cookieParser from 'cookie-parser';
+// setting up google oauth
+
+
 
 // Load config
 dotenv.config({ path: './config/config.env' });
-
-// Passport config
-import { pass } from './config/passport.js';
-pass(passport);
 
 
 const PORT = process.env.PORT || 3000;
@@ -41,6 +38,7 @@ mongoose.connect(URL, {
 
 //Setting up datetime formatting
 import moment from 'moment';
+import { Cookie } from 'express-session';
 function formatDate(date, format) {
   return moment(date).format(format)
 };
@@ -55,19 +53,9 @@ app.set('view engine', '.hbs');
 
 
 // setting up session
-app.set('trust proxy', 1) // trust first proxy
-app.use(session({
-  key: 'user_sid',
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: 'mongodb://localhost/4000' })
-}))
 
 
 // Setting up passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
 
 
 //setting up public folder
@@ -90,6 +78,7 @@ app.use(methodOverride(function (req, res) {
   }))
 
 app.use( express.json() );
+app.use(cookieParser());
 app.use('/', defaultRoute);
 app.use('/get', route);
 app.use('/waste', wasteRoute);
