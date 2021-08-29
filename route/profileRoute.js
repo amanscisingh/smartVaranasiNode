@@ -24,17 +24,20 @@ profileRoute.get('/', async (req, res) => {
 
 // APIs for data upload...
 
+
+
 // PUT API for data update...
 profileRoute.put('/api', async (req, res) => {
     try {
         const googleId = req.cookies['user-id'];
         var user = await User.findOne( { googleId: googleId } ).lean();
-        user.name = req.body.name;
+        user.firstName = req.body.firstName;
+        user.lastName = req.body.lastName;
         user.email = req.body.email;
         user.phone = req.body.phone;
         user = await User.findOneAndUpdate( { _id: user['_id'] },  user, { new: true, runValidators: true } );
         console.log(user);
-        res.redirect('/profile/' + id);
+        res.redirect('/profile/');
     } catch (error) {
         console.log(error);
     }

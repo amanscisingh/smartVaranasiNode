@@ -10,7 +10,7 @@
         <span style="margin: auto;">{{user.firstName}} | {{user.designation}}</span>
     </div>
     <div class="bottom-section">
-        <form action="/profile/api/{{user._id}}" method="POST">
+        <form action="/profile/api/" method="POST">
             <input type='hidden' name='_method' value='PUT'>
             <input type='text' name='firstName' value='{{user.firstName}}' placeholder="First Name">
             <input type='text' name='lastName' value='{{user.lastName}}' placeholder="Last Name">
